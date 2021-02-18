@@ -1,0 +1,56 @@
+@import './variables.css';
+@import './pages/404/404.css';
+@import './pages/FeedChat/feed.css';
+@import './pages/ListChat/list.css';
+@import './pages/Login/login.css';
+@import './pages/Registration/registration.css';
+@import './pages/SettingsProfile/settings.css';
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Regular.woff2') format('woff2'),
+        url('../fonts/Inter-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+.mf-page{
+	background: var(--mf-bg-white);
+	font-family: var(--mf-family);
+	font-style: normal;
+	margin: 0;
+}
+.mf-center-block{
+	display: flex;
+	min-height: 100vh;
+	align-items: center;
+	justify-content: center;
+}
+.mf-main{
+	display: flex;
+	flex-direction: column;
+}
+.visually-hidden{
+	position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+	margin: -1px;
+	opacity: 0;
+}
+.mf-form__error{
+	font-weight: normal;
+	font-size: 8px;
+	line-height: 8px;
+	color: #FF2F2F;
+	position: initial;
+	width: auto;
+	height: auto;
+	margin-top: 12px;
+}
+.mf-base-font{
+    font-weight: var(--mf-weight);
+    font-size: var(--mf-base-indent);
+    line-height: var(--mf-base-indent);
+    color: var(--mf-grey);
+}
