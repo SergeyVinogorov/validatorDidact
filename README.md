@@ -103,3 +103,4 @@ export class LoginPageController {
 ```Javascript
 private validatorService:PageFormValidatorService = new PageFormValidatorService();
 ```
+если сделать поле выше public то в таком случае становится виден сервис, но валидация все равно отрабатывает в true, всегда

@@ -19,7 +19,7 @@ type StoreType = {
 }
 export class LoginPageController {
 
-  private validatorService:PageFormValidatorService = new PageFormValidatorService();
+  public validatorService:PageFormValidatorService = new PageFormValidatorService();
 
   store: StoreType = {
     state: {
