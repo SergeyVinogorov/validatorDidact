@@ -1,4 +1,4 @@
-import { HasEmptyInterface, MaxInterface, MinInterface, PatternInterface } from "../types/loginTypes";
+import { MaxInterface, MinInterface, PatternInterface } from "../types/loginTypes";
 
 export class PageFormValidatorService {
   public validateValue(value: string, type: string) {
@@ -8,17 +8,19 @@ export class PageFormValidatorService {
       case 'tel':
         const max = new MaxInterface(11)
         const min = new MinInterface(4)
-        const pattern = new PatternInterface(new RegExp("[0-9]{3}-[0-9]{2}-[0-9]{3}"))
+        const pattern = new PatternInterface("[0-9]{3}-[0-9]{2}-[0-9]{3}")
         hasError = max.isValid(value)
         hasError = min.isValid(value)
         hasError = pattern.isValid(value)
         break;
-        case 'email':
-        const email = new PatternInterface(new RegExp('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'))
+      case 'email':
+        const email = new PatternInterface('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g')
+        // new PatternInterface(new RegExp('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'))
+        console.log(email.isValid(value));
         hasError = email.isValid(value)
       default:
-        const hasEmpty = new HasEmptyInterface
-        hasError = hasEmpty.isValid(value)
+        // const hasEmpty = new HasEmptyInterface
+        // hasError = hasEmpty.isValid(value)
         break;
       }
       return {value: value, isValid: hasError}

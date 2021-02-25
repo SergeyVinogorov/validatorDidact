@@ -30,16 +30,11 @@ export class MinInterface implements ValidInterface {
 
 export class PatternInterface implements ValidInterface {
 		regex: RegExp
-    constructor(regex: RegExp) {
-			this.regex = regex
+    constructor(regex: string) {
+			this.regex = new RegExp(regex)
 		}
     isValid(filed: string) {
-      console.log(this.regex);
-      console.log(filed);
-      console.log(filed.toLowerCase().match(this.regex));
-      console.log(this.regex.test(filed.toLowerCase()));
-
-      return this.regex.test(filed.toLowerCase());
+    return this.regex.test(filed.toLowerCase());
     }
 }
 export type fieldProp = {

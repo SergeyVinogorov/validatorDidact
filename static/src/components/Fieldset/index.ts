@@ -1,5 +1,6 @@
-import { createVNode } from "../../core/didact";
-import { LoginPageController } from "../../controllers/LoginPageController";
+// import { createVNode } from "../../core/didact";
+import Didact from "../../core/didactClass";
+// import { LoginPageController } from "../../controllers/LoginPageController";
 
 type FormFieldsetProps = {
   id: string;
@@ -11,9 +12,15 @@ type FormFieldsetProps = {
   classNameLabel?: string;
   classNameInput?: string;
   nameLabel: string;
-  setParentStore: (store: object, type: string)=>any,
+  setParentStore?: (store: object, type: string)=>any,
   typeStore: string;
   isSetting?: boolean;
+  control?: any
+}
+
+type ElementType = {
+  type: typeof Didact.Component | string,
+  props: any
 }
 
 export const Fieldset = (props: FormFieldsetProps) => {
@@ -27,55 +34,53 @@ export const Fieldset = (props: FormFieldsetProps) => {
     classNameLabel = 'mf-form__label',
     classNameInput = 'mf-form__input',
     nameLabel,
-    setParentStore,
-    typeStore,
-    isSetting
+    // setParentStore,
+    // typeStore,
+    isSetting,
+    control
   } = props
-  const loginContrl = new LoginPageController()
 
-  const handlePassStore = () => {
-    const store = loginContrl.getStore()
-    setParentStore(store, typeStore)
-  }
+  // const handlePassStore = () => {
+  //   const store = control.getStore()
+  //   setParentStore(store, typeStore)
+  // }
 
-  const initChild = () => {
-    const result: Array<Function> = []
-    const input = createVNode(
+  const initChild = ( ) => {
+    const result: Array<ElementType> = []
+    const input = Didact.createElement(
       'input',
       {
         type: type,
         id: id,
         name: name,
         placeholder: placeholder,
-        class: classNameInput,
+        className: classNameInput,
         oninput: (e: Event) => {
           const target = e.target as HTMLInputElement;
-          loginContrl.handleOnInput(target, type)
-          handlePassStore()
+          control.handleOnInput(target, type)
+          // handlePassStore()
         },
         onblur: (e: Event) => {
           const target = e.target as HTMLInputElement;
-          loginContrl.handleOnBlur(target, type)
-          handlePassStore()
+          control.handleOnBlur(target, type)
+          // handlePassStore()
         }
       },
       ""
       )
 
-    const label = createVNode(
+    const label = Didact.createElement(
       'label',
       {
         for: id,
-        class: classNameLabel,
+        className: classNameLabel,
       },
       nameLabel
       )
 
-    const errorMessage = createVNode(
+    const errorMessage = Didact.createElement(
       'div',
-      {
-        class: "mf-form__error visually-hidden",
-      },
+      { className: "mf-form__error visually-hidden" },
       message
       )
     if(isSetting){
@@ -85,5 +90,5 @@ export const Fieldset = (props: FormFieldsetProps) => {
     }
     return result
   }
-return createVNode('fieldset', {class: className}, initChild())
+return Didact.createElement('fieldset', {className: className}, initChild())
 }

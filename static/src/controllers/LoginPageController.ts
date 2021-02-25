@@ -1,4 +1,6 @@
 import { PageFormValidatorService } from "../services/PageFormValidator";
+import { BaseComponent } from "../components/BaseComponent";
+import { loginPageView } from "../view/loginPageView";
 
 type InputStateType = {
   value: string;
@@ -9,45 +11,25 @@ type InputValue = {
   value: string;
 }
 
-type StoreType = {
-  state: {
-    login: InputStateType,
-    password: InputStateType
-  },
-  onStateChanged: () => void
-  setState: (nextState: any) => void
+export interface UserPageOptions {
+    param1?: number;
+    param2?: string;
 }
-export class LoginPageController {
+export class LoginPageController<P extends UserPageOptions> extends BaseComponent<P> {
 
-  public validatorService:PageFormValidatorService = new PageFormValidatorService();
+  public readonly view = loginPageView;
 
-  store: StoreType = {
-    state: {
-      login: {
-        value: '',
-        isValid: false
-      },
-      password: {
-        value: '',
-        isValid: false
-      }
-     },
-    onStateChanged: () => {},
-    setState(nextState: any) {
-      this.state = nextState;
-      this.onStateChanged();
-    }
-  };
+  public validatorService: PageFormValidatorService = new PageFormValidatorService();
 
   handleOnInput(event: InputValue, type: string) {
     const isCorrect: InputStateType = this.validatorService.validateValue(event.value, type)
-    this.store.setState(isCorrect)
+    console.log(isCorrect);
   }
   handleOnBlur(event: InputValue, type: string) {
     const isCorrect: InputStateType = this.validatorService.validateValue(event.value, type)
-    this.store.setState(isCorrect)
+    console.log(isCorrect);
+
   }
   getStore(){
-    return this.store.state
   }
 }

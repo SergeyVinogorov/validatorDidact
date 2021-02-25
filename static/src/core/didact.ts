@@ -1,5 +1,5 @@
 type vNodeType = {
-  tagName: string; 
+  tagName: string;
   props: object;
   children: Array<Function | string>
 }
@@ -134,3 +134,31 @@ const recycleNode = (node: Node) => {
 function listener(this: any, event: Event) {
   return this[event.type](event);
 }
+
+// class Component {
+//   constructor(props) {
+//     this.props = props;
+//     this.state = this.state || {};
+//   }
+
+//   setState(partialState) {
+//     this.state = Object.assign({}, this.state, partialState);
+//     updateInstance(this.__internalInstance);
+//   }
+// }
+//   function updateInstance(internalInstance) {
+//     const parentDom = internalInstance.dom.parentNode;
+//     const element = internalInstance.element;
+//     reconcile(parentDom, internalInstance, element);
+//   }
+
+const Didact = {
+  patch,
+  createVNode,
+}
+
+export default Didact;
+
+
+
+

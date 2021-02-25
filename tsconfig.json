@@ -20,5 +20,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"sourceMap": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true
 	}
 }
